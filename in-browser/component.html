@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Composing with components</title>
+  <script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <ol>
+      <todo-item 
+        v-for="(row,index) in groceryList" 
+        v-bind:grocery="row" 
+        v-bind:key="index">
+      </todo-item>
+    </ol>
+  </div>
+  <script type="text/javascript">
+    // Define a new component called todo-item
+    Vue.component('todo-item', {
+      props:{
+        grocery:Object
+      },
+      template: '<li>{{grocery.text}}</li>'
+    })
+
+    var app = new Vue({
+      el:"#app",
+      data:{
+        groceryList: [
+          { id: 0, text: 'Vegetables' },
+          { id: 1, text: 'Cheese' },
+          { id: 2, text: 'Whatever else humans are supposed to eat' }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
